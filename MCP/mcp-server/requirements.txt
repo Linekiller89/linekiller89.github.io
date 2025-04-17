@@ -1,4 +1,0 @@
-Collecting fastapi
-  Downloading fastapi-0.115.12-py3-none-any.whl.metadata (27 kB)
-Collecting uvicorn
-  Downloading uvicorn-0.34.0-py3-none-any.whl.metadata (6.5 kB)
