@@ -1,0 +1,26 @@
+{
+  "benchmarkDate": "2024-03-21",
+  "referenceSite": "https://samuelkraft.com/",
+  "currentImplementation": {
+    "features": [
+      "다크 모드 지원",
+      "마크다운 기반 블로그 포스트",
+      "코드 하이라이팅",
+      "반응형 디자인"
+    ],
+    "techStack": [
+      "React",
+      "TypeScript",
+      "Styled Components",
+      "Vite",
+      "React Router",
+      "React Markdown"
+    ],
+    "performance": {
+      "lighthouseScore": "측정 예정",
+      "firstContentfulPaint": "측정 예정",
+      "timeToInteractive": "측정 예정"
+    }
+  },
+  "notes": "현재 구현된 기능을 유지하면서 추가 개발 진행 예정"
+}

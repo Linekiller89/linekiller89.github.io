@@ -18,6 +18,10 @@
 - React Router
 - React Markdown
 
+## 벤치마크
+
+이 프로젝트는 [samuelkraft.com](https://samuelkraft.com/)을 벤치마크로 참고하여 개발되었습니다.
+
 ## 설치 및 실행
 
 ```bash
