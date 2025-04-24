@@ -2,6 +2,10 @@
 
 개인 블로그 프로젝트입니다. React와 TypeScript를 사용하여 개발되었습니다.
 
+## 배포 URL
+
+https://linekiller89.github.io/My_Blog/
+
 ## 주요 기능
 
 - 다크 모드 지원
