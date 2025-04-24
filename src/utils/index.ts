@@ -8,20 +8,16 @@ export const formatDate = (date: string): string => {
   });
 };
 
-export const sortPosts = (posts: Post[], filter: string): Post[] => {
-  switch (filter) {
-    case "latest":
-      return [...posts].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
-    case "popular":
-      // 임시로 최신순으로 정렬
-      return [...posts].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
-    default:
-      return posts;
-  }
+export const sortPosts = (
+  posts: Post[],
+  order: "asc" | "desc" = "desc"
+): Post[] => {
+  return [...posts].sort((a, b) => {
+    if (order === "desc") {
+      return b.title.localeCompare(a.title);
+    }
+    return a.title.localeCompare(b.title);
+  });
 };
 
 export const getExcerpt = (content: string, length: number = 150): string => {

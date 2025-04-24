@@ -1,11 +1,8 @@
 export interface Post {
-  id: string;
-  title: string;
   slug: string;
-  date: string;
-  excerpt: string;
+  title: string;
   content: string;
-  tags: string[];
+  excerpt: string;
 }
 
 export interface PostMetadata {

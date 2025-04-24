@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import { Blog } from "./pages/Blog";
+import { BlogPost } from "./pages/BlogPost";
 import GlobalStyle from "./styles/GlobalStyle";
 import Home from "./pages/Home/index";
-import Blog from "./pages/Blog/index";
-import BlogPost from "./pages/BlogPost/index";
 import NotFound from "./pages/NotFound/index";
 import Layout from "./components/Layout";
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <Router>
       <GlobalStyle />
+      <Header />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
