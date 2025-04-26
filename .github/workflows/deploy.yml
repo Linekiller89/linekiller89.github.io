@@ -1,9 +1,20 @@
 name: Deploy to GitHub Pages
 
 on:
+  # 수동 실행을 위한 워크플로우 디스패치 설정
+  workflow_dispatch:
+    inputs:
+      deploy_type:
+        description: "Deploy Type"
+        required: true
+        default: "publish"
+        type: choice
+        options:
+          - publish
+          - unpublish
+  # 자동 배포 (main 브랜치에 push 될 때)
   push:
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,6 +27,8 @@ concurrency:
 
 jobs:
   build:
+    # unpublish가 선택되었을 때는 빌드 작업을 건너뜁니다
+    if: github.event.inputs.deploy_type != 'unpublish'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -39,6 +52,7 @@ jobs:
           path: ./dist
 
   deploy:
+    if: github.event.inputs.deploy_type != 'unpublish'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -48,3 +62,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  unpublish:
+    if: github.event.inputs.deploy_type == 'unpublish'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unpublish GitHub Pages
+        uses: actions/configure-pages@v4
+        with:
+          enable: false
