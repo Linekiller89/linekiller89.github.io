@@ -3,7 +3,7 @@
 const GITHUB_API_URL = "https://api.github.com";
 const REPO_OWNER = "Linekiller89";
 const REPO_NAME = "linekiller89.github.io";
-const POSTS_PATH = "content/posts";
+const POSTS_PATH = "src/content/posts";
 
 interface GitHubContent {
   name: string;
