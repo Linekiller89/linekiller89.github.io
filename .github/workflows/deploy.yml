@@ -17,7 +17,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -67,7 +67,16 @@ jobs:
     if: github.event.inputs.deploy_type == 'unpublish'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Unpublish GitHub Pages
         uses: actions/configure-pages@v4
         with:
           enable: false
+
+      - name: Delete GitHub Pages branch
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git push origin --delete gh-pages || true
