@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Post } from "../types/post";
 import { getPosts } from "../api/posts";
 import { formatDate } from "../utils/github/markdown";
+import ErrorMessage from "./ErrorMessage";
+import LoadingSpinner from "./LoadingSpinner";
 
 const PostListContainer = styled.div`
   max-width: 800px;
@@ -61,25 +63,29 @@ export default function PostList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        const fetchedPosts = await getPosts();
-        setPosts(fetchedPosts);
-        setError(null);
-      } catch (err) {
-        setError("포스트를 불러오는데 실패했습니다.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+  const loadPosts = async () => {
+    try {
+      const fetchedPosts = await getPosts();
+      setPosts(fetchedPosts);
+      setError(null);
+    } catch (err) {
+      setError("포스트를 불러오는데 실패했습니다.");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
+  };
 
+  useEffect(() => {
     loadPosts();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} onRetry={loadPosts} />;
+  if (posts.length === 0)
+    return (
+      <ErrorMessage title="포스트 없음" message="작성된 포스트가 없습니다." />
+    );
 
   return (
     <PostListContainer>

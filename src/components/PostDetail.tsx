@@ -5,6 +5,8 @@ import ReactMarkdown from "react-markdown";
 import { Post } from "../types/post";
 import { getPost } from "../api/posts";
 import { formatDate } from "../utils/github/markdown";
+import ErrorMessage from "./ErrorMessage";
+import LoadingSpinner from "./LoadingSpinner";
 
 const PostContainer = styled.article`
   max-width: 800px;
@@ -87,32 +89,33 @@ export default function PostDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function loadPost() {
-      if (!slug) return;
+  const loadPost = async () => {
+    if (!slug) return;
 
-      try {
-        const fetchedPost = await getPost(slug);
-        if (fetchedPost) {
-          setPost(fetchedPost);
-          setError(null);
-        } else {
-          setError("포스트를 찾을 수 없습니다.");
-        }
-      } catch (err) {
-        setError("포스트를 불러오는데 실패했습니다.");
-        console.error(err);
-      } finally {
-        setLoading(false);
+    try {
+      const fetchedPost = await getPost(slug);
+      if (fetchedPost) {
+        setPost(fetchedPost);
+        setError(null);
+      } else {
+        setError("포스트를 찾을 수 없습니다.");
       }
+    } catch (err) {
+      setError("포스트를 불러오는데 실패했습니다.");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
+  };
 
+  useEffect(() => {
     loadPost();
   }, [slug]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-  if (!post) return <div>포스트를 찾을 수 없습니다.</div>;
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} onRetry={loadPost} />;
+  if (!post)
+    return <ErrorMessage title="404" message="포스트를 찾을 수 없습니다." />;
 
   return (
     <PostContainer>
