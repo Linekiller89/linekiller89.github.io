@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 const GITHUB_API_URL = "https://api.github.com";
 const REPO_OWNER = "Linekiller89";
 const REPO_NAME = "linekiller89.github.io";
@@ -41,7 +43,9 @@ export async function fetchPostContent(path: string): Promise<string> {
   const data: GitHubContent = await response.json();
 
   if (data.content && data.encoding === "base64") {
-    return atob(data.content.replace(/\n/g, ""));
+    return Buffer.from(data.content.replace(/\n/g, ""), "base64").toString(
+      "utf-8"
+    );
   }
 
   throw new Error("Invalid content format");

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Post } from "../types";
+import { getPost } from "../api/posts";
 
 export const usePost = (slug: string) => {
   const [post, setPost] = useState<Post | null>(null);
@@ -8,17 +9,8 @@ export const usePost = (slug: string) => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`/posts/${slug}.md`);
-        const content = await response.text();
-        setPost({
-          slug,
-          title: slug
-            .split("-")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" "),
-          content,
-          excerpt: content.split("\n")[0],
-        });
+        const fetchedPost = await getPost(slug);
+        setPost(fetchedPost);
       } catch (error) {
         console.error("Error fetching post:", error);
       } finally {
