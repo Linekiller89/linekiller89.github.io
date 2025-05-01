@@ -1,4 +1,5 @@
 import matter from "gray-matter";
+import { Buffer } from "buffer";
 import { Post, PostMetadata } from "../../types/post";
 
 export function parseMarkdown(content: string, slug: string): Post {
