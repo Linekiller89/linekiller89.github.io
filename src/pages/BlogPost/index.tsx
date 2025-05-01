@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { usePost } from "../../hooks/usePost";
 import { PostContent } from "./styles";
+import { MarkdownContent } from "../../components/PostDetail";
 
 export const BlogPost = () => {
   const { slug } = useParams();
@@ -17,7 +18,7 @@ export const BlogPost = () => {
   return (
     <PostContent>
       <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <MarkdownContent content={post.content} />
     </PostContent>
   );
 };
