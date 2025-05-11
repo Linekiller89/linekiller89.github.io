@@ -9,12 +9,12 @@ export async function getPosts(): Promise<Post[]> {
       files
         .filter((file) => file.name.endsWith(".md"))
         .map(async (file) => {
-          const content = await fetchPostContent(file.path);
           const slug = file.name.replace(".md", "");
-          return parseMarkdown(content, slug);
+          const content = await fetchPostContent(file.path);
+          const post = parseMarkdown(content, slug);
+          return post;
         })
     );
-
     return posts
       .filter((post) => !post.draft)
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

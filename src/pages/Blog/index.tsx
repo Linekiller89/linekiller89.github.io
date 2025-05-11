@@ -1,5 +1,6 @@
 import { usePosts } from "../../hooks/usePosts";
-import { BlogList, BlogPostPreview } from "./styles";
+import { BlogList, BlogPostRow, PostDate, PostTitle } from "./styles";
+import { format } from "date-fns";
 
 export const Blog = () => {
   const { posts, isLoading } = usePosts();
@@ -11,10 +12,10 @@ export const Blog = () => {
   return (
     <BlogList>
       {posts.map((post) => (
-        <BlogPostPreview key={post.slug} to={`/blog/${post.slug}`}>
-          <h2>{post.title}</h2>
-          <p>{post.excerpt}</p>
-        </BlogPostPreview>
+        <BlogPostRow key={post.slug}>
+          <PostDate>{format(new Date(post.date), "MMM dd, yyyy")}</PostDate>
+          <PostTitle to={`/blog/${post.slug}`}>{post.title}</PostTitle>
+        </BlogPostRow>
       ))}
     </BlogList>
   );
