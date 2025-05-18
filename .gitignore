@@ -46,4 +46,7 @@ lerna-debug.log*
 
 # Cache
 .cache/
-.temp/ 
+.temp/
+
+# Temporary review files
+/temp_review/ 
