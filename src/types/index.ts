@@ -3,6 +3,8 @@ export interface Post {
   title: string;
   content: string;
   excerpt: string;
+  date: string;
+  tags: string[];
 }
 
 export interface PostMetadata {
