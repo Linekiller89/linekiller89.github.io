@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Post } from "../types";
+import { Post } from "../types/post";
 import { getPosts } from "../api/posts";
 
 export const usePosts = () => {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Post } from "../types";
+import { Post } from "../types/post";
 import { getPost } from "../api/posts";
 
 export const usePost = (slug: string) => {

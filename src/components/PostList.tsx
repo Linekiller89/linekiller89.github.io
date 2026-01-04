@@ -91,7 +91,7 @@ export default function PostList() {
     <PostListContainer>
       {posts.map((post) => (
         <PostItem key={post.slug}>
-          <PostTitle to={`/posts/${post.slug}`}>{post.title}</PostTitle>
+          <PostTitle to={`/blog/${post.slug}`}>{post.title}</PostTitle>
           <PostMeta>{formatDate(post.date)}</PostMeta>
           <PostDescription>{post.description}</PostDescription>
           <TagList>

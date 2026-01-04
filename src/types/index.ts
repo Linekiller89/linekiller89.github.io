@@ -1,19 +1,6 @@
-export interface Post {
-  slug: string;
-  title: string;
-  content: string;
-  excerpt: string;
-  date: string;
-  tags: string[];
-}
-
-export interface PostMetadata {
-  title: string;
-  date: string;
-  tags: string[];
-  category: string;
-  excerpt: string;
-}
+// Post 관련 타입은 post.ts에서 import
+export type { Post, PostMetadata, PostFile } from "./post";
+import type { Post } from "./post";
 
 export interface PostFilter {
   tag?: string;
